@@ -7,10 +7,10 @@ function addMessageToChat(name, msg, date) {
 	document.getElementById("chat_list").appendChild(li);
 }
 
-function addUserToUserList(name, time) {
+function addUserToUserList(name) {
 	var li = document.createElement("li");
 	li.className = "media media-body";
-	li.innerHTML = "<h5>"+name+"</h5><small class='text-muted'>Online For "+time+"</small>";
+	li.innerHTML = "<h5>"+name+"</h5>";
 	document.getElementById("user_list").appendChild(li);
 }
 
@@ -29,11 +29,41 @@ function waitForMessages() {
 	$.ajax({
 		url : "messageHandler",
 		method : "GET",
+		cache: false,
 		success : function(data, status, response) {
 			var name = response.getResponseHeader("name");
-			var date = response.getResponseHeader("Date")
+			var date = response.getResponseHeader("Date");
 			addMessageToChat(name, data, date);
 			waitForMessages();
+		}
+	});
+}
+
+function waitForNewUsers() {
+	$.ajax({
+		url : "userHandler",
+		method : "GET",
+		data: {event: "new user"},
+		cache: false,
+		success : function(data, status, response) {
+			var name = response.getResponseHeader("name");
+			addUserToUserList(name);
+			waitForNewUsers();
+		}
+	});
+}
+
+function getOnlineUsers() {
+	$.ajax({
+		url: "userHandler",
+		method: "GET",
+		data: {event: "online users"},
+		cache: false,
+		success : function(data) {
+			var users = JSON.parse(data);
+			for(var i = 0;i < users.length;i++) {
+				addUserToUserList(users[i]);
+			}
 		}
 	});
 }
@@ -42,6 +72,12 @@ $(document).ready(function(){
     do{
     	nickname = prompt("Please enter a nickname", "");
     }while(nickname.trim() == "");
+    
+    $.ajax({
+		url: "userHandler",
+		method: "POST",
+		data: {name: nickname}
+	});
 	
 	$("#input_text").keyup(function(event) {
 	    if(event.keyCode == 13) { //enter key
@@ -49,6 +85,8 @@ $(document).ready(function(){
 	    }
 	});
     
+	getOnlineUsers();
+	waitForNewUsers();
 	waitForMessages();
 });
 
