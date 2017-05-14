@@ -10,6 +10,7 @@
         <![endif]-->
     <title>Chat Now!</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/index.js"></script>
 </head>
 <body style="font-family:Verdana">
@@ -44,9 +45,9 @@
             </div>
             <div class="panel-footer">
                 <div class="input-group">
-                                    <input class="form-control" placeholder="Enter Message" type="text">
+                                    <input id="input_text" class="form-control" placeholder="Enter Message" type="text">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-info" type="button">SEND</button>
+                                        <button onclick="sendMessage()" class="btn btn-info" type="button">SEND</button>
                                     </span>
                                 </div>
             </div>
