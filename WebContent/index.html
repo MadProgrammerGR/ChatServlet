@@ -1,55 +1,139 @@
-<!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="UTF-8">
-    <title>Swanky Chatbox</title>
-    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/style.css">
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js'></script>
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	<script src="js/index.js"></script>
-  </head>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Chat Now!</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
 
-  <body>
+</head>
+<body style="font-family:Verdana">
 
-    <div class='container' ng-cloak ng-app="chatApp">
-  <h1>Swanky Chatbox UI With Angular</h1>
-  <div class='chatbox' ng-controller="MessageCtrl as chatMessage">
-    <div class='chatbox__user-list'>
-      <h1>User list</h1>
-      <div class='chatbox__user--active'>
-        <p>Jack Thomson</p>
-      </div>
-      <div class='chatbox__user--busy'>
-        <p>Angelina Jolie</p>
-      </div>
-      <div class='chatbox__user--active'>
-        <p>George Clooney</p>
-      </div>
-      <div class='chatbox__user--active'>
-        <p>Seth Rogen</p>
-      </div>
-      <div class='chatbox__user--away'>
-        <p>John Lydon</p>
-      </div>
-    </div>
-    <div class="chatbox__messages" ng-repeat="message in messages">
-      <div id="chat_panel" class="chatbox__messages__user-message">
-        <div class="chatbox__messages__user-message--ind-message">
-          <p class="name">{{message.Name}}</p>
-          <br/>
-          <p class="message">{{message.Message}}</p>
+  <div class="container">
+<div class="row " style="padding-top:40px;">
+    <h3 class="text-center">Simple Chat Page</h3>
+    <br><br>
+    <div class="col-md-8">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                RECENT CHAT HISTORY
+            </div>
+            <div class="panel-body">
+					<ul class="media-list">
+
+                                    <li class="media">
+
+                                        <div class="media-body">
+
+                                            <div class="media">
+                                                
+                                                <div class="media-body">Test message<br>
+                                                   <small class="text-muted">George | 23rd June at 5:00pm</small>
+                                                    <hr>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li><li class="media">
+
+                                        <div class="media-body">
+
+                                            <div class="media">
+                                                
+                                                <div class="media-body">Test message 2<br>
+                                                   <small class="text-muted">George | 23rd June at 5:00pm</small>
+                                                    <hr>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li><li class="media">
+
+                                        <div class="media-body">
+
+                                            <div class="media">
+                                                
+                                                <div class="media-body">Test message 3<br>
+                                                   <small class="text-muted">George | 23rd June at 5:00pm</small>
+                                                    <hr>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+     
+     
+     
+                                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                                    <input class="form-control" placeholder="Enter Message" type="text">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info" type="button">SEND</button>
+                                    </span>
+                                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <form>
-      <input type="text" placeholder="Enter your message">
-    </form>
+    <div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+               ONLINE USERS
+            </div>
+            <div class="panel-body">
+                <ul class="media-list">
+
+                                    <li class="media">
+
+                                        <div class="media-body">
+
+                                            <div class="media">
+                                                
+                                                <div class="media-body">
+                                                    <h5>George</h5>
+                                                    
+                                                   <small class="text-muted">Active From 3 hours</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li><li class="media">
+
+                                        <div class="media-body">
+
+                                            <div class="media">
+                                                
+                                                <div class="media-body">
+                                                    <h5>Someone else</h5>
+                                                    
+                                                   <small class="text-muted">Active From 3 hours</small>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+     
+                    
+                    
+                     
+     
+                    
+                    
+                                </ul>
+                </div>
+            </div>
+        
+    </div>
+</div>
   </div>
 
-	<input type="button" value="click me" onclick="addMessage()"/>
-    
-    
-    
-  </body>
+
+
+</body>
 </html>
