@@ -3,7 +3,7 @@ var nickname;
 function addMessageToChat(name, msg, date) {
 	var li = document.createElement("li");
 	li.className = "media media-body";
-	li.innerHTML = "Test message<br><small class='text-muted'>"+ name +" | "+ date+"</small><hr>";
+	li.innerHTML = msg+"<br><small class='text-muted'>"+ name +" | "+ date+"</small><hr>";
 	document.getElementById("chat_list").appendChild(li);
 }
 
@@ -18,13 +18,24 @@ function sendMessage() {
 	var msg = document.getElementById("input_text").value;
 	if(msg.trim() == "") return;
 	document.getElementById("input_text").value = "";
-	$.post("messageHandler",{name: nickname, message: msg});
+	$.ajax({
+		url: "messageHandler",
+		method: "POST",
+		data: {name: nickname, message: msg}
+	});
 }
 
-function gotMessages(messages) {
-	for(msg in messages) {
-		addMessageToChat(msg.name, msg.message, msg.date);
-	}
+function waitForMessages() {
+	$.ajax({
+		url : "messageHandler",
+		method : "GET",
+		success : function(data, status, response) {
+			var name = response.getResponseHeader("name");
+			var date = response.getResponseHeader("Date")
+			addMessageToChat(name, data, date);
+			waitForMessages();
+		}
+	});
 }
 
 $(document).ready(function(){
@@ -38,18 +49,7 @@ $(document).ready(function(){
 	    }
 	});
     
-    //get messages synchronously
-    while(true) {
-    	$.ajax({
-    		url: "messageHandler",
-    		method: "GET",
-    		async: false,
-    		success: function(data){
-    			gotMessages(data);
-    		}
-    	});
-    }
-    
+	waitForMessages();
 });
 
 
